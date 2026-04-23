@@ -1,17 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Job Seekers love Portal</title>
+  <title>Job Seekers Portal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Latest jobs for freshers, IT, banking and work from home opportunities">
+  
   <style>
-    body { font-family: Arial; margin:0; background:#f5f7fa; }
+    body {
+      margin:0;
+      font-family: Arial, sans-serif;
+      background:#f4f6f9;
+    }
+
     header {
       background:#0a66c2;
       color:white;
       padding:20px;
       text-align:center;
     }
-    .container { padding:20px; }
+
+    nav {
+      background:#ffffff;
+      padding:10px;
+      text-align:center;
+      box-shadow:0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    nav a {
+      margin:0 15px;
+      text-decoration:none;
+      color:#0a66c2;
+      font-weight:bold;
+    }
+
+    .container {
+      padding:20px;
+      max-width:900px;
+      margin:auto;
+    }
+
+    .search-box {
+      margin-bottom:20px;
+      text-align:center;
+    }
+
+    .search-box input {
+      width:80%;
+      padding:10px;
+      border-radius:8px;
+      border:1px solid #ccc;
+    }
+
     .job {
       background:white;
       padding:15px;
@@ -19,7 +58,12 @@
       border-radius:12px;
       box-shadow:0 3px 8px rgba(0,0,0,0.1);
     }
-    .job h3 { margin:0; }
+
+    .job h3 {
+      margin:0;
+      color:#0a66c2;
+    }
+
     .btn {
       display:inline-block;
       margin-top:10px;
@@ -29,7 +73,18 @@
       border-radius:6px;
       text-decoration:none;
     }
-    .btn:hover { background:#004182; }
+
+    .btn:hover {
+      background:#004182;
+    }
+
+    footer {
+      text-align:center;
+      padding:15px;
+      background:#0a66c2;
+      color:white;
+      margin-top:20px;
+    }
   </style>
 </head>
 
@@ -40,23 +95,51 @@
   <p>Latest Jobs | Freshers | IT | Banking</p>
 </header>
 
+<nav>
+  <a href="#">Home</a>
+  <a href="#">IT Jobs</a>
+  <a href="#">Banking Jobs</a>
+  <a href="#">Work From Home</a>
+</nav>
+
 <div class="container">
 
+  <div class="search-box">
+    <input type="text" placeholder="Search jobs (coming soon...)">
+  </div>
+
+  <!-- Job 1 -->
   <div class="job">
     <h3>SQL Developer</h3>
     <p>💰 Salary: ₹5–8 LPA</p>
     <p>📍 Location: Mumbai</p>
+    <p>Experience: 1-3 Years</p>
     <a class="btn" href="#">Apply Now</a>
   </div>
 
+  <!-- Job 2 -->
   <div class="job">
     <h3>Bank Clerk</h3>
     <p>💰 Salary: ₹3–6 LPA</p>
     <p>📍 Location: India</p>
+    <p>Qualification: Graduate</p>
+    <a class="btn" href="#">Apply Now</a>
+  </div>
+
+  <!-- Job 3 -->
+  <div class="job">
+    <h3>Work From Home Data Entry</h3>
+    <p>💰 Salary: ₹2–4 LPA</p>
+    <p>📍 Location: Remote</p>
+    <p>Skills: Basic Computer Knowledge</p>
     <a class="btn" href="#">Apply Now</a>
   </div>
 
 </div>
+
+<footer>
+  <p>© 2026 Job Seekers Portal | All Rights Reserved</p>
+</footer>
 
 </body>
 </html>
