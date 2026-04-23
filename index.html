@@ -1,145 +1,137 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>The Job Seekers Portal </title>
+  <title>Job Seekers Portal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Latest jobs for freshers, IT, banking and work from home opportunities">
-  
   <style>
-    body {
-      margin:0;
-      font-family: Arial, sans-serif;
-      background:#f4f6f9;
-    }
-
-    header {
-      background:#0a66c2;
-      color:white;
-      padding:20px;
-      text-align:center;
-    }
-
-    nav {
-      background:#ffffff;
-      padding:10px;
-      text-align:center;
-      box-shadow:0 2px 5px rgba(0,0,0,0.1);
-    }
-
-    nav a {
-      margin:0 15px;
-      text-decoration:none;
-      color:#0a66c2;
-      font-weight:bold;
-    }
-
-    .container {
-      padding:20px;
-      max-width:900px;
-      margin:auto;
-    }
-
-    .search-box {
-      margin-bottom:20px;
-      text-align:center;
-    }
-
-    .search-box input {
-      width:80%;
-      padding:10px;
-      border-radius:8px;
-      border:1px solid #ccc;
-    }
-
-    .job {
-      background:white;
-      padding:15px;
-      margin-bottom:15px;
-      border-radius:12px;
-      box-shadow:0 3px 8px rgba(0,0,0,0.1);
-    }
-
-    .job h3 {
-      margin:0;
-      color:#0a66c2;
-    }
-
-    .btn {
-      display:inline-block;
-      margin-top:10px;
-      padding:8px 12px;
-      background:#0a66c2;
-      color:white;
-      border-radius:6px;
-      text-decoration:none;
-    }
-
-    .btn:hover {
-      background:#004182;
-    }
-
-    footer {
-      text-align:center;
-      padding:15px;
-      background:#0a66c2;
-      color:white;
-      margin-top:20px;
-    }
+    /* Your original styles + enhancements */
+    body { margin:0; font-family: Arial, sans-serif; background:#f4f6f9; }
+    header { background:#0a66c2; color:white; padding:20px; text-align:center; }
+    nav { background:#ffffff; padding:10px; text-align:center; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
+    nav a { margin:0 15px; text-decoration:none; color:#0a66c2; font-weight:bold; }
+    .container { padding:20px; max-width:900px; margin:auto; }
+    .search-box { margin-bottom:20px; text-align:center; }
+    .search-box input { width:80%; padding:10px; border-radius:8px; border:1px solid #ccc; font-size:16px; }
+    .job { background:white; padding:15px; margin-bottom:15px; border-radius:12px; box-shadow:0 3px 8px rgba(0,0,0,0.1); display:none; } /* Hidden by default */
+    .job.show { display:block; }
+    .job h3 { margin:0; color:#0a66c2; }
+    .btn { display:inline-block; margin-top:10px; padding:8px 12px; background:#0a66c2; color:white; border-radius:6px; text-decoration:none; cursor:pointer; }
+    .btn:hover { background:#004182; }
+    /* Modal */
+    .modal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5); }
+    .modal-content { background:white; margin:15% auto; padding:20px; border-radius:12px; width:90%; max-width:500px; }
+    .close { color:#aaa; float:right; font-size:28px; font-weight:bold; cursor:pointer; }
+    footer { text-align:center; padding:15px; background:#0a66c2; color:white; margin-top:20px; }
+    @media (max-width:600px) { .search-box input { width:95%; } }
   </style>
 </head>
-
 <body>
-
 <header>
   <h1>🚀 Job Seekers Portal</h1>
   <p>Latest Jobs | Freshers | IT | Banking</p>
 </header>
 
 <nav>
-  <a href="#">Home</a>
-  <a href="#">IT Jobs</a>
-  <a href="#">Banking Jobs</a>
-  <a href="#">Work From Home</a>
+  <a href="#" onclick="filterJobs('')">Home</a>
+  <a href="#" onclick="filterJobs('IT')">IT Jobs</a>
+  <a href="#" onclick="filterJobs('Banking')">Banking Jobs</a>
+  <a href="#" onclick="filterJobs('Remote')">Work From Home</a>
 </nav>
 
 <div class="container">
-
   <div class="search-box">
-    <input type="text" placeholder="Search jobs (coming soon...)">
+    <input type="text" id="searchInput" placeholder="🔍 Search jobs by title, location, salary..." onkeyup="searchJobs()">
   </div>
 
-  <!-- Job 1 -->
-  <div class="job">
-    <h3>SQL Developer</h3>
-    <p>💰 Salary: ₹5–8 LPA</p>
-    <p>📍 Location: Mumbai</p>
-    <p>Experience: 1-3 Years</p>
-    <a class="btn" href="#">Apply Now</a>
+  <div id="jobsContainer">
+    <!-- Jobs populated by JS -->
   </div>
+</div>
 
-  <!-- Job 2 -->
-  <div class="job">
-    <h3>Bank Clerk</h3>
-    <p>💰 Salary: ₹3–6 LPA</p>
-    <p>📍 Location: India</p>
-    <p>Qualification: Graduate</p>
-    <a class="btn" href="#">Apply Now</a>
+<!-- Apply Modal -->
+<div id="applyModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2 id="modalTitle">Apply for Job</h2>
+    <form id="applyForm">
+      <input type="text" placeholder="Your Name" required><br><br>
+      <input type="email" placeholder="Your Email" required><br><br>
+      <textarea placeholder="Why you're perfect for this job?" rows="4" required></textarea><br><br>
+      <button type="submit" class="btn" style="width:100%;">Send Application</button>
+    </form>
   </div>
-
-  <!-- Job 3 -->
-  <div class="job">
-    <h3>Work From Home Data Entry</h3>
-    <p>💰 Salary: ₹2–4 LPA</p>
-    <p>📍 Location: Remote</p>
-    <p>Skills: Basic Computer Knowledge</p>
-    <a class="btn" href="#">Apply Now</a>
-  </div>
-
 </div>
 
 <footer>
   <p>© 2026 Job Seekers Portal | All Rights Reserved</p>
 </footer>
 
+<script>
+  // Pro job data - edit here to add real jobs
+  const jobs = [
+    { title: 'SQL Developer', salary: '₹5–8 LPA', location: 'Mumbai', exp: '1-3 Years', type: 'IT', company: 'TechCorp' },
+    { title: 'Bank Clerk', salary: '₹3–6 LPA', location: 'India', exp: 'Graduate', type: 'Banking', company: 'SBI' },
+    { title: 'Work From Home Data Entry', salary: '₹2–4 LPA', location: 'Remote', exp: 'Basic Computer', type: 'Remote', company: 'Freelance' },
+    // Add more: { title: '...', ... }
+  ];
+
+  function renderJobs(jobArray = jobs) {
+    const container = document.getElementById('jobsContainer');
+    container.innerHTML = '';
+    jobArray.forEach(job => {
+      const div = document.createElement('div');
+      div.className = 'job show';
+      div.innerHTML = `
+        <h3>${job.title} @ ${job.company}</h3>
+        <p>💰 Salary: ${job.salary}</p>
+        <p>📍 Location: ${job.location}</p>
+        <p>Experience: ${job.exp}</p>
+        <button class="btn" onclick="openModal('${job.title}', '${job.company}')">Apply Now</button>
+      `;
+      container.appendChild(div);
+    });
+  }
+
+  function searchJobs() {
+    const input = document.getElementById('searchInput').value.toLowerCase();
+    const filtered = jobs.filter(job => 
+      job.title.toLowerCase().includes(input) ||
+      job.location.toLowerCase().includes(input) ||
+      job.salary.toLowerCase().includes(input) ||
+      job.company.toLowerCase().includes(input)
+    );
+    renderJobs(filtered);
+  }
+
+  function filterJobs(type) {
+    const filtered = type ? jobs.filter(job => job.type === type) : jobs;
+    renderJobs(filtered);
+    document.getElementById('searchInput').value = '';
+  }
+
+  function openModal(title, company) {
+    document.getElementById('modalTitle').textContent = `Apply for ${title} @ ${company}`;
+    document.getElementById('applyModal').style.display = 'block';
+  }
+
+  function closeModal() {
+    document.getElementById('applyModal').style.display = 'none';
+  }
+
+  document.getElementById('applyForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Application sent! (Demo - integrate EmailJS for real emails)');
+    closeModal();
+  });
+
+  window.onclick = function(event) {
+    const modal = document.getElementById('applyModal');
+    if (event.target == modal) closeModal();
+  }
+
+  // Initial load
+  renderJobs();
+</script>
 </body>
 </html>
